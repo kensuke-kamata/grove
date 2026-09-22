@@ -27,4 +27,4 @@ jobs:
       - name: Build
         run: cmake --build build --config ${{ matrix.configuration }} --parallel
       - name: Run smoke tests
-        run: ctest --test-dir build -C ${{ matrix.configuration }} --output-on-failure --no-tests=error
+        run: ctest --test-dir build -C ${{ matrix.configuration }} -V --output-on-failure --no-tests=error

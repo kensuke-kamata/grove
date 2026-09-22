@@ -16,8 +16,8 @@ struct read_result {
 read_result read_file(const char* path, std::ios_base::openmode mode) {
     std::ifstream file(path, mode);
 
-    // Alternative: construct the string directly from stream-buffer iterators.
-    // This lets std::string manage its storage.
+    // NOTE: alternative string construction: std::string{istreambuf_iterator, end_iterator}
+    //       std::string manages the resulting storage
 
     file.seekg(0, std::ios::end);
     const std::streamsize buffer_size = file.tellg();

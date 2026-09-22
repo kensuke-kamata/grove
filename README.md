@@ -2,7 +2,7 @@
 
 A playground for game programming in C++.
 
-## Build and test
+## Build and Test
 
 Requirements:
 

@@ -1,32 +1,58 @@
+#include <cstdio>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
+#include <memory>
+#include <string>
 
 namespace {
 
-std::string read_file(const char* path, std::ios_base::openmode mode) {
+struct read_result {
+    std::size_t buffer_size;
+    std::size_t read_size;
+    std::string data;
+};
+
+read_result read_file(const char* path, std::ios_base::openmode mode) {
     std::ifstream file(path, mode);
 
-    // alternative: construct string directly from stream-buffer iterators.
-    //              this lets std::string manage its storage instead of using a pre-sized buffer.
-    // return {
-    //     std::istreambuf_iterator<char>(file),
-    //     std::istreambuf_iterator<char>()
-    // }
+    // Alternative: construct the string directly from stream-buffer iterators.
+    // This lets std::string manage its storage.
 
     file.seekg(0, std::ios::end);
-    const std::streamsize size = file.tellg();
+    const std::streamsize buffer_size = file.tellg();
     file.seekg(0, std::ios::beg);
 
-    auto buffer = std::make_unique<char[]>(static_cast<std::size_t>(size));
-    file.read(buffer.get(), size);
+    auto buffer = std::make_unique<char[]>(static_cast<std::size_t>(buffer_size));
+    file.read(buffer.get(), buffer_size);
 
-    return std::string(buffer.get(), static_cast<std::size_t>(size));
+    const std::streamsize read_size = file.gcount();
+    return {
+        static_cast<std::size_t>(buffer_size),
+        static_cast<std::size_t>(read_size),
+        std::string(buffer.get(), static_cast<std::size_t>(read_size))
+    };
 }
 
 void print_bytes(const std::string& data) {
-    for (const unsigned char c : data) {
-        std::cout << static_cast<int>(c) << " ";
+    for (const unsigned char byte : data) {
+        std::cout << std::hex
+                  << std::setw(2)
+                  << std::setfill('0')
+                  << static_cast<int>(byte)
+                  << ' ';
     }
+    std::cout << std::dec
+              << std::setfill(' ')
+              << '\n';
+}
+
+void print_result(const char* mode_name, const read_result& result) {
+    std::cout << '[' << mode_name << " mode]\n"
+              << "buffer size : " << result.buffer_size << '\n'
+              << "read   size : " << result.read_size << '\n'
+              << "data  (hex) : ";
+    print_bytes(result.data);
     std::cout << '\n';
 }
 
@@ -40,16 +66,11 @@ int main() {
         file.write("A\r\nB\r\n", 6);
     }
 
-    const std::string text   = read_file(path, std::ios::in);
-    const std::string binary = read_file(path, std::ios::in | std::ios::binary);
+    const read_result text   = read_file(path, std::ios::in);
+    const read_result binary = read_file(path, std::ios::in | std::ios::binary);
 
-    std::cout << "text   size : " << text.size() << '\n';
-    std::cout << "text   bytes: ";
-    print_bytes(text);
-
-    std::cout << "binary size : " << binary.size() << '\n';
-    std::cout << "binary bytes: ";
-    print_bytes(binary);
+    print_result("text", text);
+    print_result("binary", binary);
 
     std::remove(path);
     return 0;

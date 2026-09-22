@@ -9,3 +9,6 @@ add_test(NAME file_modes COMMAND file_modes)
 
 add_executable(scope_resolution scope_resolution.cpp)
 add_test(NAME scope_resolution COMMAND scope_resolution)
+
+add_executable(object_lifetime object_lifetime.cpp)
+add_test(NAME object_lifetime COMMAND object_lifetime)

@@ -12,3 +12,7 @@ add_test(NAME scope_resolution COMMAND scope_resolution)
 
 add_executable(object_lifetime object_lifetime.cpp)
 add_test(NAME object_lifetime COMMAND object_lifetime)
+
+add_executable(flagset flagset.cpp)
+target_include_directories(flagset PRIVATE ${PROJECT_SOURCE_DIR}/include)
+add_test(NAME flagset COMMAND flagset)

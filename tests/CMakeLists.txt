@@ -4,6 +4,9 @@ set_tests_properties(hello PROPERTIES
     PASS_REGULAR_EXPRESSION "Hello, grove!"
 )
 
+add_executable(raylib_window raylib_window.cpp)
+target_link_libraries(raylib_window PRIVATE raylib)
+
 add_executable(file_modes file_modes.cpp)
 add_test(NAME file_modes COMMAND file_modes)
 

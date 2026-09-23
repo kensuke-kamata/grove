@@ -7,6 +7,15 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
+include(FetchContent)
+FetchContent_Declare(
+    raylib
+    GIT_REPOSITORY https://github.com/raysan5/raylib.git
+    GIT_TAG 6.0
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(raylib)
+
 if(MSVC)
     add_compile_options(/W4 /permissive- /utf-8)
 else()

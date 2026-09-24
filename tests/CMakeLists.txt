@@ -4,9 +4,6 @@ set_tests_properties(hello PROPERTIES
     PASS_REGULAR_EXPRESSION "Hello, grove!"
 )
 
-add_executable(raylib_window raylib_window.cpp)
-target_link_libraries(raylib_window PRIVATE raylib)
-
 add_executable(file_modes file_modes.cpp)
 add_test(NAME file_modes COMMAND file_modes)
 
@@ -19,3 +16,9 @@ add_test(NAME object_lifetime COMMAND object_lifetime)
 add_executable(flagset flagset.cpp)
 target_include_directories(flagset PRIVATE ${PROJECT_SOURCE_DIR}/include)
 add_test(NAME flagset COMMAND flagset)
+
+add_executable(raylib_window raylib_window.cpp)
+target_link_libraries(raylib_window PRIVATE raylib)
+
+add_executable(alpha_blending alpha_blending.cpp)
+target_link_libraries(alpha_blending PRIVATE raylib)

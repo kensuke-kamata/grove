@@ -34,7 +34,15 @@ Generated files belong under `build/`, `build-*/`, or `cmake-build-*/`, which ar
 
 ## Adding experiments
 
-Place each experiment in `tests/<topic>.cpp` and add a target to
+Place interactive raylib programs in `src/<topic>/main.cpp` and add a target to
+`src/CMakeLists.txt`, for example:
+
+```cmake
+add_executable(example example/main.cpp)
+target_link_libraries(example PRIVATE raylib)
+```
+
+Place non-interactive experiments in `tests/<topic>.cpp` and add a target to
 `tests/CMakeLists.txt`, for example:
 
 ```cmake

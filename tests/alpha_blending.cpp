@@ -5,7 +5,7 @@ Color blend(Color src, Color dst, int alpha)
     const unsigned char r = dst.r + (src.r - dst.r) * alpha / 255;
     const unsigned char g = dst.g + (src.g - dst.g) * alpha / 255;
     const unsigned char b = dst.b + (src.b - dst.b) * alpha / 255;
-    return Color(r, g, b, 255);
+    return Color {r, g, b, 255};
 }
 
 int main()
@@ -13,12 +13,13 @@ int main()
     constexpr int screen_width = 800;
     constexpr int screen_height = 450;
 
-    constexpr Rectangle slider_track(220.f, 340.f, 360.f, 8.f);
-    constexpr Rectangle slider_hit_area(
+    constexpr Rectangle slider_track {220.f, 340.f, 360.f, 8.f};
+    constexpr Rectangle slider_hit_area {
         slider_track.x,
         slider_track.y - 15.f,
         slider_track.width,
-        slider_track.height + 30.f);
+        slider_track.height + 30.f
+    };
 
     int alpha = 128;
 
@@ -47,12 +48,12 @@ int main()
         // slider
         DrawRectangleRec(slider_track, LIGHTGRAY);
         DrawRectangleRec(
-            Rectangle(
+            Rectangle {
                 slider_track.x,
                 slider_track.y,
                 knob_x - slider_track.x,
                 slider_track.height
-            ),
+            },
             BLUE);
         DrawCircle(
             static_cast<int>(knob_x),

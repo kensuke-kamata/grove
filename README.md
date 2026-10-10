@@ -7,7 +7,7 @@ A playground for game programming in C++.
 Requirements:
 
 - CMake 3.28 or newer
-- Git and network access to GitHub; CMake fetches raylib 6.0 during configuration
+- Git and network access to GitHub; CMake fetches raylib 6.0 and hierstate during configuration
 - A C++20 toolchain:
   - macOS: Xcode or Command Line Tools (Apple Clang and Make)
   - Windows: Visual Studio 2022 or Build Tools 2022 with the Desktop development with C++ workload (MSVC v143 and Windows SDK)
@@ -36,6 +36,12 @@ ctest --test-dir build -C Debug --output-on-failure
 
 See [the build guide](docs/build/build.md) and [the testing guide](docs/testing/testing.md)
 for more detail.
+
+## so_long sequence demo
+
+Run `./build/bin/so_long` on macOS or `.\build\bin\Debug\so_long.exe` on Windows.
+Press Space to start, use WASD to move, press C to reach the clear screen, and press
+Space to return to the title. The transitions use [hierstate](https://github.com/kensuke-kamata/hierstate).
 
 ## CI
 

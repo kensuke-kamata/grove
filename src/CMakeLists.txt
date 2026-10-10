@@ -10,4 +10,4 @@ file(GLOB SO_LONG_SOURCES CONFIGURE_DEPENDS
 
 add_executable(so_long application.cpp ${SO_LONG_SOURCES})
 target_include_directories(so_long PRIVATE ${PROJECT_SOURCE_DIR}/include)
-target_link_libraries(so_long PRIVATE raylib)
+target_link_libraries(so_long PRIVATE raylib hierstate)

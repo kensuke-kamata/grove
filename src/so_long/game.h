@@ -2,22 +2,24 @@
 
 #include "grove/application.h"
 
+#include <memory>
+
 namespace grove
 {
+
+class root;
 
 class game final : public application
 {
 public:
     game();
+    ~game() override;
 
 private:
     void update(float dt) override;
     void draw() override;
 
-    float x = 320.f;
-    float y = 240.f;
-    float speed = 120.f;
-    static constexpr float size = 32.f;
+    std::unique_ptr<root> scene;
 };
 
 }

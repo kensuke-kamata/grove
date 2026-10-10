@@ -16,6 +16,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(raylib)
 
+FetchContent_Declare(
+    hierstate
+    GIT_REPOSITORY https://github.com/kensuke-kamata/hierstate.git
+    GIT_TAG 0.1.0
+)
+FetchContent_MakeAvailable(hierstate)
+
 if(MSVC)
     add_compile_options(/W4 /permissive- /utf-8)
 else()
